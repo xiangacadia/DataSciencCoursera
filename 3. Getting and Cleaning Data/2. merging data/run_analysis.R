@@ -67,5 +67,10 @@ subject <- mapply(c, train_subject, test_subject)
 ## append subject to the data frame
 mean_std <- cbind(mean_std, subject)
 
-##
-acast(aqm, day+month ~ variable, mean, margins = TRUE)
+## Creates a second, independent tidy data set with the average of 
+## each variable for each activity and each subject. 
+names(mean_std)[81] <- "subject"
+data_melt <- melt(mean_std, id=c("activity", "subject"), measure.vars=names(mean_std)[1:79], na.rm=TRUE)
+tidy_data <- acast(data_melt, activity+subject ~ variable, mean, margins = TRUE)
+
+write.csv(tidy_data, "tidy_data.txt")
