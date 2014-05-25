@@ -4,11 +4,11 @@
 library(reshape2)
 
 ## read in the training data and test data
-train_x <- read.csv("./UCI HAR Dataset/train/x_train.txt", sep="", header=FALSE, skipNul = TRUE)
-train_y <- read.csv("./UCI HAR Dataset/train/y_train.txt", sep="", header=FALSE, skipNul = TRUE)
+train_x <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/train/x_train.txt", sep="", header=FALSE, skipNul = TRUE)
+train_y <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/train/y_train.txt", sep="", header=FALSE, skipNul = TRUE)
 
-test_x <- read.csv("./UCI HAR Dataset/test/x_test.txt", sep="", header=FALSE, skipNul = TRUE)
-test_y <- read.csv("./UCI HAR Dataset/test/y_test.txt", sep="", header=FALSE, skipNul = TRUE)
+test_x <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/test/x_test.txt", sep="", header=FALSE, skipNul = TRUE)
+test_y <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/test/y_test.txt", sep="", header=FALSE, skipNul = TRUE)
 
 ## appending train_x and test_x on top of each other
 z <- rbind(train_x, test_x)
@@ -24,8 +24,8 @@ cols <- append(cols_mean, cols_std)
 mean_std <- z[,cols]
 
 ## read activities
-train_y <- read.csv("./UCI HAR Dataset/train/y_train.txt", sep="", header=FALSE, skipNul = TRUE)
-test_y <- read.csv("./UCI HAR Dataset/test/y_test.txt", sep="", header=FALSE, skipNul = TRUE)
+train_y <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/train/y_train.txt", sep="", header=FALSE, skipNul = TRUE)
+test_y <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/test/y_test.txt", sep="", header=FALSE, skipNul = TRUE)
 y <- mapply(c, train_y, test_y)
 
 ## Uses descriptive activity names to name the activities in the data set
@@ -60,8 +60,8 @@ for(i in y){
 mean_std <- cbind(mean_std, activity)
 
 ## read subjects
-train_subject <- read.csv("./UCI HAR Dataset/train/subject_train.txt", sep="", header=FALSE, skipNul = TRUE)
-test_subject <- read.csv("./UCI HAR Dataset/test/subject_test.txt", sep="", header=FALSE, skipNul = TRUE)
+train_subject <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/train/subject_train.txt", sep="", header=FALSE, skipNul = TRUE)
+test_subject <- read.csv("/Users/xiangjiang/Documents/git/Data Science at Coursera/3. Getting and Cleaning Data/2. merging data/UCI HAR Dataset/test/subject_test.txt", sep="", header=FALSE, skipNul = TRUE)
 subject <- mapply(c, train_subject, test_subject)
 
 ## append subject to the data frame
