@@ -14,8 +14,8 @@ This project aims at answering the two questions:
 
 We conclude that:
 
-- 1
-- 2
+- Manual transmission is better than automatic for MPG.
+- Compared with automatic transmissions, manual transmittions have an additional 2.94mpg.
 
 ### Exploratory Analysis
 

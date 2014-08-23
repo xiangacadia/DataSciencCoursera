@@ -69,8 +69,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </ul>
 <p>We conclude that:</p>
 <ul>
-<li>1</li>
-<li>2</li>
+<li>Manual transmission is better than automatic for MPG.</li>
+<li>Compared with automatic transmissions, manual transmittions have an additional 2.94mpg.</li>
 </ul>
 </div>
 <div id="exploratory-analysis" class="section level3">
@@ -180,7 +180,7 @@ summary(lm4)</code></pre>
 ## Multiple R-squared:  0.36,   Adjusted R-squared:  0.338 
 ## F-statistic: 16.9 on 1 and 30 DF,  p-value: 0.000285</code></pre>
 <p>As we can see, the first model (lm(formula = mpg ~ wt + qsec + am, data = mtcars)) has the smallest residual standard error.</p>
-<p>We visualize residuals in figure 2 of appendix.</p>
+<p>We visualize residuals in figure 2 of appendix, from these figures, we can see, there is no significant relationship between residuals and fitted values.</p>
 </div>
 <div id="appendix" class="section level3">
 <h3>Appendix</h3>
