@@ -24,9 +24,6 @@ We begin by inspecting the distribution of mpg for different types of transmissi
 We also inspect the difference of mean and standard deviation for mpg with different transmission types.
 As shown below, we can see the mean and standard deviation for mpg with different transmission types are significantly different.
 
-```{r, echo=FALSE, results='hide',message=FALSE}
-library(dplyr)
-```
 ```{r}
 data(mtcars)
 summary(mtcars$mpg[mtcars$am==0])
@@ -45,23 +42,52 @@ For transmission type 0 (atomatic), we get the model.
 ```{r, results='hide'}
 lm1 <- step(lm(mpg ~ ., data=mtcars))
 ```
+
+Residual standard error for this model is:
+
 ```{r}
-summary(lm1)
+summary(lm1)$sigma
 ```
 
 The coefficients suggest that, compared with automatic transmissions, manual transmittions have an additional 2.94mpg.
 
 To identify whether *wt* and *qsec* have significant influences to the model. We build models with and without *wt* and *qsec* respectively.
 We, then, use residual standard error to measure the performance of different models
+
+
+The second model is:
 ```{r}
 lm2 <- lm(mpg ~ am + wt, data=mtcars)
-summary(lm2)
+```
 
+Residual standard error for this model is:
+```{r}
+summary(lm2)$sigma
+```
+
+
+The third model is:
+```{r}
 lm3 <- lm(mpg ~ am + qsec, data=mtcars)
-summary(lm3)
+```
 
+Residual standard error for this model is:
+
+
+```{r}
+summary(lm3)$sigma
+```
+
+The fourth model is:
+```{r}
 lm4 <- lm(mpg ~ am, data=mtcars)
-summary(lm4)
+```
+
+
+Residual standard error for this model is:
+
+```{r}
+summary(lm4)$sigma
 ```
 
 As we can see, the first model (lm(formula = mpg ~ wt + qsec + am, data = mtcars)) has the smallest residual standard error.
