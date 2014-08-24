@@ -1,0 +1,48 @@
+Iris Classification using Decision Tree
+========================================================
+author: Xiang Jiang
+date: Aug 24 2014
+
+Introduction to Dataset
+========================================================
+
+The Iris dataset has five variables:
+```{r,echo=FALSE}
+library(ggplot2)
+data(iris)
+names(iris)
+```
+The first four variables are used for classification, and the last variable *Species* is the target variable.
+
+
+Exploratory Data Analysis
+========================================================
+
+In the Shiny application, we can visualize the dataset by specifying x and y axis yourself.
+
+```{r, echo=FALSE}
+qplot(Sepal.Length, Sepal.Width, data=iris, color=Species)
+```
+
+From exploratory analysis, we find that different species of Iris are separable from the features we have.
+
+
+Building the Decision Tree
+========================================================
+
+We now build the decision tree and visualize the tree as follows.
+
+```{r, echo=FALSE}
+library(caret)
+library(rattle)
+library(rpart)
+library(rpart.plot)
+fit <- rpart(Species~., method="class", data=iris)
+fancyRpartPlot(fit)
+```
+
+
+Making Predictions
+========================================================
+In the Shiny app, user can select values for the four features of the input, and a prediction for the specie will be made and shown in the Predictions panel.
+
