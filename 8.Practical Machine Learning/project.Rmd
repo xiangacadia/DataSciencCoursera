@@ -1,0 +1,77 @@
+---
+title: "Project for Machine Learning"
+author: "Xiang Jiang"
+date: "August 23, 2014"
+output: html_document
+---
+
+### Preprocessing
+
+Load data and use medianImputation to repalce missing values.
+```{r,message=FALSE}
+library(caret)
+
+# Load data
+train <- read.csv('/Users/xiangjiang/Documents/git/Data Science at Coursera/8.Practical Machine Learning/pml-training.csv')
+
+test <- read.csv('/Users/xiangjiang/Documents/git/Data Science at Coursera/8.Practical Machine Learning/pml-testing.csv')
+
+train <- train[,-1]
+test <- test[,-1]
+
+# remove columns with too much NA
+col2remove <- apply(!is.na(train), 2, sum)>5000
+train <- train[,col2remove]
+test <- test[,col2remove]
+
+train$user_name <- factor(train$user_name)
+train$cvtd_timestamp <-  factor(train$cvtd_timestamp)
+train$new_window <- factor(train$new_window)
+train$classe <- factor(train$classe)
+
+test$user_name <- factor(test$user_name)
+test$cvtd_timestamp <-  factor(test$cvtd_timestamp)
+test$new_window <- factor(test$new_window)
+
+
+# get numeric columns
+numeric_cols <- sapply(train, is.numeric)
+
+# preprocessing for training data
+prep <- preProcess(train[, numeric_cols], method = c("center","scale","medianImpute"))
+newTrain <- predict(prep, train[, numeric_cols])
+newTrain <- cbind(user_name=train$user_name,cvtd_timestamp=train$cvtd_timestamp,new_window=train$new_window,newTrain)
+
+# preprocessing for testing data
+newTest <- predict(prep, test[, numeric_cols])
+newTest <- cbind(user_name=test$user_name,cvtd_timestamp=test$cvtd_timestamp,new_window=test$new_window,newTest)
+
+```
+
+### Training the Model
+
+The model is trained using decision tree and cross-validation is used to select the best model.
+
+```{r,message=FALSE}
+ctrl <- trainControl(method = "cv")
+
+fit <- train(train[,]$classe~., method="ctree",data=newTrain[,], trControl = ctrl)
+```
+
+### Model Evaluation
+
+The accuracy for acoss-validation are:
+```{r,message=FALSE}
+fit$results
+```
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was mincriterion = 0.5, and classification accuracy was 97.7%.
+
+### Making Predictions
+
+The predictions for the test set are:
+```{r,message=FALSE}
+prediction <- predict(fit, newTest)
+prediction
+```
+
